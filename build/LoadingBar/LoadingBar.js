@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { STATE_KEY } from '../constants';
 import cx from 'classnames';
 
-function mapStateToProps(state, props) {
-    props['progressState'] = state[STATE_KEY];
+function mapStateToProps(state) {
+    return {
+        progressState: state[STATE_KEY]
+    };
 }
 
 function LoadingBar(props) {
