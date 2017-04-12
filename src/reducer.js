@@ -6,9 +6,9 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-    if(action.type && action.type == TASK_STARTED)
+    if(action.type && action.type === TASK_STARTED)
         return { complete: state.complete, running: state.running + 1 };
-    if(action.type && action.type == TASK_FINISHED)
+    if(action.type && action.type === TASK_FINISHED)
         return { complete: state.complete + 1, running: state.running - 1};
     return state;
 }
