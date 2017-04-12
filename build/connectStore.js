@@ -7,8 +7,8 @@ export default function connectLoadingBar(_ref) {
     var getTaskState = _ref.getTaskState;
 
     return function (createStore) {
-        return function (reducer, initialState) {
-            var store = applyMiddleware(createMiddleware(getTaskState))(createStore)(reducer, initialState);
+        return function (rootReducer, initialState) {
+            var store = applyMiddleware(createMiddleware(getTaskState))(createStore)(rootReducer, initialState);
             store[STATE_KEY] = reducer;
             return store;
         };

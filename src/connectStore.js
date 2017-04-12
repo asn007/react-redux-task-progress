@@ -6,10 +6,10 @@ import { STATE_KEY } from './constants'
 export default function connectLoadingBar({
     getTaskState
 }) {
-    return createStore => (reducer, initialState) => {
+    return createStore => (rootReducer, initialState) => {
         const store = applyMiddleware(
             createMiddleware(getTaskState)
-        )(createStore)(reducer, initialState);
+        )(createStore)(rootReducer, initialState);
         store[STATE_KEY] = reducer;
         return store;
     }
