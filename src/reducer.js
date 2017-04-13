@@ -1,8 +1,8 @@
-import { TASK_STARTED, TASK_FINISHED, RESET_PROGRESS } from './constants'
+import { TASK_STARTED, TASK_FINISHED, RESET_PROGRESS } from './constants';
 
 const initialState = {
-    complete: 0,
-    running: 0
+  complete: 0,
+  running: 0
 };
 
 export default function reducer(state = initialState, action) {
@@ -13,8 +13,7 @@ export default function reducer(state = initialState, action) {
     else if(action.type === TASK_FINISHED) {
       newState = { complete: state.complete + 1, running: state.running - 1 };
       if(newState.running === 0 && newState.complete !== 0) newState = initialState;
-    }
-    else if(action.type === RESET_PROGRESS)
+    } else if(action.type === RESET_PROGRESS)
       newState = initialState;
   }
   return newState;
