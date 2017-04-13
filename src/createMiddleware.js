@@ -12,7 +12,7 @@ const getTaskState = (action) => {
 };
 
 export default function createMiddleware(getTaskState = getTaskState) {
-    return ({ dispatch, getState }) => store => next => action => {
+    return ({ dispatch, getState }) => next => action => {
         const taskState = getTaskState(action);
         if(taskState !== NOT_A_TASK) dispatch({ type: taskState });
         return next(action);

@@ -17,13 +17,11 @@ export default function createMiddleware() {
     return function (_ref) {
         var dispatch = _ref.dispatch,
             getState = _ref.getState;
-        return function (store) {
-            return function (next) {
-                return function (action) {
-                    var taskState = getTaskState(action);
-                    if (taskState !== NOT_A_TASK) dispatch({ type: taskState });
-                    return next(action);
-                };
+        return function (next) {
+            return function (action) {
+                var taskState = getTaskState(action);
+                if (taskState !== NOT_A_TASK) dispatch({ type: taskState });
+                return next(action);
             };
         };
     };
