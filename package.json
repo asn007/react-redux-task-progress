@@ -2,9 +2,9 @@
   "name": "react-redux-task-progress",
   "version": "1.0.8",
   "description": "A plugin for Redux to show asynchronous task progress (i.e. fetching data to load page)",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d build",
+    "build": "babel src -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
