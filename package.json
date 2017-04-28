@@ -1,6 +1,6 @@
 {
   "name": "react-redux-task-progress",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-alpha.1",
   "description": "A plugin for Redux to show asynchronous task progress (i.e. fetching data to load page)",
   "main": "src/index.js",
   "scripts": {
