@@ -21,7 +21,7 @@ LoadingBarWrapper.contextTypes = {
 };
 
 LoadingBarWrapper.propTypes = {
-  state: ProgressShape.isRequired
+  state: React.PropTypes.object.isRequired
 };
 
 export default connect(state => ({ state }))(LoadingBarWrapper);

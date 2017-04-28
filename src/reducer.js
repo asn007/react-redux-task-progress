@@ -10,6 +10,7 @@ const initialState = {
 /* eslint-disable */
 export default function reducer(state = initialState, action) {
   let newState = Object.assign({}, state);
+
   switch(action.type) {
     case TASK_STARTED: {
       newState.running++;
@@ -18,9 +19,6 @@ export default function reducer(state = initialState, action) {
     case TASK_FINISHED: {
       newState.complete++;
       newState.running--;
-      if(newState.running === 0 && newState.complete === 0) {
-        return initialState;
-      }
       break;
     }
     case TASK_FAKE_STARTED: {
@@ -29,6 +27,7 @@ export default function reducer(state = initialState, action) {
     }
     case TASK_FAKE_FINISHED: {
       newState.fakeComplete++;
+      newState.fakeRunning--;
       break;
     }
     case RESET_PROGRESS: {
