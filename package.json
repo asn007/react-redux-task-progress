@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/asn007/react-redux-task-progress#readme",
   "peerDependencies": {
-    "react": "^15.0.0",
+    "react": "^14.0.0 || ^15.0.0",
     "react-redux": "^5.0.0",
     "redux": "^3.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "airbnb-style": "2.0.0",

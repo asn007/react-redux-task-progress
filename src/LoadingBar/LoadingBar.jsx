@@ -1,17 +1,18 @@
-import React, { Component, PropTypes } from 'react';
-import { STATE_KEY } from '../constants';
+import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
+import { STATE_KEY } from '../constants';
+import { ProgressShape } from '../shapes';
 
 
-class LoadingBarWrapper extends Component {
+class LoadingBarWrapper extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.memoizedSelector = this.context.store[STATE_KEY];
+    this.selector = this.context.store[STATE_KEY];
   }
 
   render() {
-    return <LoadingBar progressState={this.props.state[this.memoizedSelector]} {...this.props} />;
+    return <LoadingBar progressState={this.props.state[this.selector]} {...this.props} />;
   }
 }
 
@@ -19,9 +20,14 @@ LoadingBarWrapper.contextTypes = {
   store: React.PropTypes.object.isRequired
 };
 
-export default connect((state) => ({ state }))(LoadingBarWrapper);
+LoadingBarWrapper.propTypes = {
+  state: ProgressShape.isRequired
+};
 
-class LoadingBar extends Component {
+export default connect(state => ({ state }))(LoadingBarWrapper);
+
+// eslint-disable-next-line
+class LoadingBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,22 +38,22 @@ class LoadingBar extends Component {
 
   componentWillReceiveProps(newProps) {
     const { progressState } = newProps;
-    let completed = 1 - (progressState.running / (progressState.complete + progressState.running));
+    // eslint-disable-next-line
+    let completed = 1 - ((progressState.running + progressState.fakeRunning) / (progressState.complete + progressState.fakeComplete + progressState.running + progressState.fakeRunning));
     if(isNaN(completed)) completed = 1;
-    this.setState((prevState) => ({ value: completed, noTransition: prevState.value > completed }));
-  };
+    this.setState(prevState => ({ value: completed, noTransition: prevState.value > completed }));
+  }
 
   render() {
-    const { className, progressState, theme, alwaysShow } = this.props;
-    const completed = this.state.value;
-    const style = { width: `${this.state.value * 100}%`};
-    if(this.state.noTransition) style['transition'] = 'none';
+    const { className, theme, alwaysShow } = this.props;
+    const style = { width: `${this.state.value * 100}%` };
+    if(this.state.noTransition) style.transition = 'none';
     return (
       <div
         className={cx(
-          className,
-          theme.progressContainer,
-          { [theme.progressHidden]: (this.state.value === 1 || this.state.value === 0) && !alwaysShow }
+            className,
+            theme.progressContainer,
+            { [theme.progressHidden]: (this.state.value === 1 || this.state.value === 0) && !alwaysShow }
           )
         }
       >
@@ -60,12 +66,10 @@ class LoadingBar extends Component {
 }
 
 LoadingBar.propTypes = {
-  className: PropTypes.string,
-  progressState: PropTypes.shape({
-    running: PropTypes.number.isRequired,
-    complete: PropTypes.number.isRequired
-  }).isRequired,
-  alwaysShow: PropTypes.bool
+  className: React.PropTypes.string,
+  // eslint-disable-next-line
+  progressState: ProgressShape.isRequired,
+  alwaysShow: React.PropTypes.bool
 };
 
 LoadingBar.defaultProps = {

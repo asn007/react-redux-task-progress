@@ -1,6 +1,5 @@
-import { applyMiddleware, combineReducers } from 'redux';
+import { applyMiddleware } from 'redux';
 import createMiddleware from './createMiddleware';
-import reducer from './reducer';
 import { STATE_KEY } from './constants';
 
 export default function connectLoadingBar(_ref) {
